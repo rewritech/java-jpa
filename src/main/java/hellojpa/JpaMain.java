@@ -1,11 +1,10 @@
 package hellojpa;
 
-import org.hibernate.internal.build.AllowSysOut;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.List;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -23,13 +22,24 @@ public class JpaMain {
 //            em.persist(member);
 
             // Select Member
-            Member findMember = em.find(Member.class, 1l);
+//            Member findMember = em.find(Member.class, 1l);
 
             // Update Member
-            findMember.setName("updatedName");
+//            findMember.setName("updatedName");
 
             // Delete Member
 //            em.remove(findMember);
+
+            // JPQL: entity Object is targeted  (SQL DB Table is targeted)
+            List<Member> result = em.createQuery("select m from Member as m", Member.class)
+                    .setFirstResult(0)
+                    .setMaxResults(10)
+                    .getResultList();
+
+            for (Member member : result) {
+                System.out.println(member.getName());
+            }
+
 
             tx.commit();
         } catch (Exception e) {
