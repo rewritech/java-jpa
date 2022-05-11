@@ -29,8 +29,9 @@ public class JpaMain {
 //            Member findMemberB = em.find(Member.class, 1l);
 //            System.out.println(findMemberA == findMemberB); // true
 
-            // Update Member
+            // Update Member 변경 감지(Dirty Check)
 //            findMember.setName("updatedName");
+            //em.persist(findMember);   // 불필요: no need
 
             // Delete Member
 //            em.remove(findMember);
