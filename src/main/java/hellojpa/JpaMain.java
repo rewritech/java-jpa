@@ -18,8 +18,8 @@ public class JpaMain {
             // create Member
 //            Member member = new Member();
 //            member.setId(1L);
-//            member.setName("HelloA");
-//            em.persist(member);
+//            member.setName("HelloA");     // 비영속: non-persist state
+//            em.persist(member);           // 영속: persist state
 
             // Select Member
 //            Member findMember = em.find(Member.class, 1l);
@@ -40,8 +40,7 @@ public class JpaMain {
                 System.out.println(member.getName());
             }
 
-
-            tx.commit();
+            tx.commit();        // Send SQL
         } catch (Exception e) {
             tx.rollback();
         } finally {
