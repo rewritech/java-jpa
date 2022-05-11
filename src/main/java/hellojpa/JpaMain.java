@@ -37,6 +37,7 @@ public class JpaMain {
 //            em.remove(findMember);
 
             // JPQL: entity Object is targeted  (SQL DB Table is targeted)
+            // Send em.flush(). For  insert
             List<Member> result = em.createQuery("select m from Member as m", Member.class)
                     .setFirstResult(0)
                     .setMaxResults(10)
@@ -52,6 +53,7 @@ public class JpaMain {
             em.persist(member1);
             em.persist(member2);
 
+//            em.flush();         // Send SQL. It's usually used for test.
             tx.commit();        // Send SQL
         } catch (Exception e) {
             tx.rollback();
