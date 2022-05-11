@@ -28,6 +28,8 @@ public class JpaMain {
 //            Member findMemberA = em.find(Member.class, 1l);
 //            Member findMemberB = em.find(Member.class, 1l);
 //            System.out.println(findMemberA == findMemberB); // true
+//            em.detach(findMemberB);   // 일부 준영속: specific entity detach
+//            em.clear();               // 전부 준영속: all entities detach
 
             // Update Member 변경 감지(Dirty Check)
 //            findMember.setName("updatedName");
