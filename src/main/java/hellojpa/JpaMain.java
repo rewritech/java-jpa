@@ -24,6 +24,11 @@ public class JpaMain {
             // Select Member
 //            Member findMember = em.find(Member.class, 1l);
 
+            // same object as persist
+//            Member findMemberA = em.find(Member.class, 1l);
+//            Member findMemberB = em.find(Member.class, 1l);
+//            System.out.println(findMemberA == findMemberB); // true
+
             // Update Member
 //            findMember.setName("updatedName");
 
