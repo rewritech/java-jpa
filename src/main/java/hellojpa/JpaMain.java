@@ -45,6 +45,12 @@ public class JpaMain {
                 System.out.println(member.getName());
             }
 
+            Member member1 = new Member(150l,"A");
+            Member member2 = new Member(160l,"B");
+            // 쓰기 지연: delay insert 구지 commit 직전에 모아서 insert 할 필요가 없다 와우!
+            em.persist(member1);
+            em.persist(member2);
+
             tx.commit();        // Send SQL
         } catch (Exception e) {
             tx.rollback();
