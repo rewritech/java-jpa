@@ -27,6 +27,10 @@ public class Member {
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastModifiedDate;
 
+    // 데이터타입 보고 Date 및 Time 등록
+    private LocalDate testLocalDate;
+    private LocalDateTime testLocalDateTime;
+
     @Lob    // 큰 데이터
     private String description;
 
