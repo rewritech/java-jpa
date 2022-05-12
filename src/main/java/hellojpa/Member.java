@@ -17,7 +17,8 @@ public class Member {
     @Column()
     private Integer age;
 
-    @Enumerated(EnumType.STRING)    // DB에 enum 없기에 지정
+    // DB에 enum 없기에 지정. enum 순서기준 0,1,2로 등록되기에 EnumType.STRING 필수
+    @Enumerated(EnumType.STRING)
     private RoleType roleType;
 
     @Temporal(TemporalType.TIMESTAMP)   // 시간 데이터 지정
