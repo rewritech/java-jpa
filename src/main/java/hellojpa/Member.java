@@ -25,7 +25,9 @@ public class Member {
 
     @Lob    // 큰 데이터
     private String description;
-    //Getter, Setter…
+
+    @Transient  // DB미사용
+    private String temp;
 
     public Member() {
         
