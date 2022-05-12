@@ -1,41 +1,33 @@
 package hellojpa;
 
-//import javax.persistence.Column;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-//import javax.persistence.Table;
-
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 @Entity
-//@Entity(name = "Member")  // 클래스명이 기본값. 다른 패키지에 동일 클래스명이 있을 때 지정
-//@Table(name = "Member")   // 테이블명 지정
 public class Member {
     @Id
     private Long id;
-//    @Column(name = "username")
-    @Column(unique = true, length = 10)
-    private String name;
 
-    public Member() {}
+    @Column(name = "name")
+    private String username;
 
-    public Member(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+    private Integer age;
 
-    public Long getId() {
-        return id;
-    }
+    @Enumerated(EnumType.STRING)    // DB에 enum 없기에 지정
+    private RoleType roleType;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @Temporal(TemporalType.TIMESTAMP)   // 시간 데이터 지정
+    private Date createdDate;
 
-    public String getName() {
-        return name;
-    }
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastModifiedDate;
 
-    public void setName(String name) {
-        this.name = name;
+    @Lob    // 큰 데이터
+    private String description;
+    //Getter, Setter…
+
+    public Member() {
+        
     }
 }

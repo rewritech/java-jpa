@@ -40,20 +40,16 @@ public class JpaMain {
 
             // JPQL: entity Object is targeted  (SQL DB Table is targeted)
             // Send em.flush(). For  insert
-            List<Member> result = em.createQuery("select m from Member as m", Member.class)
-                    .setFirstResult(0)
-                    .setMaxResults(10)
-                    .getResultList();
+//            List<Member> result = em.createQuery("select m from Member as m", Member.class)
+//                    .setFirstResult(0)
+//                    .setMaxResults(10)
+//                    .getResultList();
 
-            for (Member member : result) {
-                System.out.println(member.getName());
-            }
-
-            Member member1 = new Member(150l,"A");
-            Member member2 = new Member(160l,"B");
+//            Member member1 = new Member(150l,"A");
+//            Member member2 = new Member(160l,"B");
             // 쓰기 지연: delay insert 구지 commit 직전에 모아서 insert 할 필요가 없다 와우!
-            em.persist(member1);
-            em.persist(member2);
+//            em.persist(member1);
+//            em.persist(member2);
 
 //            em.flush();         // Send SQL. It's usually used for test.
             tx.commit();        // Send SQL
