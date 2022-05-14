@@ -62,6 +62,11 @@ public class JpaMain {
             member.setTramId(team.getId());
             em.persist(member);
 
+            Member findMember = em.find(Member.class, member.getId());
+
+            Long findTeamId = findMember.getTramId();
+            Team fineTeam = em.find(Team.class, findTeamId);
+
             tx.commit();        // Send SQL
         } catch (Exception e) {
             tx.rollback();
