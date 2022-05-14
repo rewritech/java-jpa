@@ -53,28 +53,48 @@ public class JpaMain {
 
 //            em.flush();         // Send SQL. It's usually used for test.
 
+//            Team team = new Team();
+//            team.setName("TeamA");
+//            em.persist(team);
+//
+//            Member member = new Member();
+//            member.setUsername("member1");
+//            member.setTeam(team);
+//            em.persist(member);
+
+//            Member findMember = em.find(Member.class, member.getId());
+//            Team findTeam = findMember.getTeam();
+//            List<Member> members = findTeam.getMembers();
+
+//            Team newTeam = em.find(Team.class, 100L);
+//            findMember.setTeam(newTeam);    // 참조 팀 변경
+
             Team team = new Team();
             team.setName("TeamA");
             em.persist(team);
 
             Member member = new Member();
             member.setUsername("member1");
-            member.setTeam(team);
+//            member.setTeam(team);             // *member는 연관관계 주인이기에 수정 권한이 있다.
+//            team은 연관관계 주인이 아니기에 수정 권한이 없다. 객체 참조 위해 지정
+//            -> member.setTeam(team)에 team.getMembers().add(this) 추가해 실수방지 (changeTeam으로 변경)
+//            -> 혹은 team에 member.setTeam(this)를 지닌 addMember(member) 추가
+//            -> 위 둘 중 하나만 사용한다.
+//            -> Gim 나는 수정권한이 있는 member객체에 changeTeam 추가가 좋아보임
+//            team.getMembers().add(member);
+            member.changeTeam(team);             // *member는 연관관계 주인이기에 수정 권한이 있다.
+//            team.addMember(member);
             em.persist(member);
+
+            //  flush와 team.getMembers().add(member) 실행 안 하면, member 추가 안 된 1차 캐쉬 데이터를 들고 옴
+            Team findTeam = em.find(Team.class, team.getId());
+            List<Member> finedMembers = findTeam.getMembers();
+            System.out.println("==============");
+            System.out.println(finedMembers.get(0).getUsername());
+            System.out.println("==============");
 
             em.flush();
             em.clear();
-
-            Member findMember = em.find(Member.class, member.getId());
-
-            Team findTeam = findMember.getTeam();
-            List<Member> members = findTeam.getMembers();
-            for (Member m : members) {
-                System.out.println("getUsername : " + m.getUsername());
-            }
-
-//            Team newTeam = em.find(Team.class, 100L);
-//            findMember.setTeam(newTeam);    // 참조 팀 변경
 
             tx.commit();        // Send SQL
         } catch (Exception e) {

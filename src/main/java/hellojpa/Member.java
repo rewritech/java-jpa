@@ -91,6 +91,11 @@ public class Member {
         this.team = team;
     }
 
+    public void changeTeam(Team team) {
+        this.team = team;
+        team.getMembers().add(this); // team은 연관관계 주인이 아니기에 수정 권한이 없다. 객체 참조 위해 지정
+    }
+
     public RoleType getRoleType() {
         return roleType;
     }
