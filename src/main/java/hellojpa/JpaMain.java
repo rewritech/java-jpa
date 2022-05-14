@@ -54,18 +54,19 @@ public class JpaMain {
 //            em.flush();         // Send SQL. It's usually used for test.
 
             Team team = new Team();
-            team.setName("TramA");
+            team.setName("TeamA");
             em.persist(team);
 
             Member member = new Member();
             member.setUsername("member1");
-            member.setTramId(team.getId());
+            member.setTeam(team);
             em.persist(member);
 
             Member findMember = em.find(Member.class, member.getId());
 
-            Long findTeamId = findMember.getTramId();
-            Team fineTeam = em.find(Team.class, findTeamId);
+            Team findTeam = findMember.getTeam();
+
+            System.out.println("findTeam.getId(): " + findTeam.getId());
 
             tx.commit();        // Send SQL
         } catch (Exception e) {

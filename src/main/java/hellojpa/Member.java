@@ -36,9 +36,11 @@ public class Member {
     @Column(name = "USERNAME")
     private String username;
 
-
-    @Column(name = "TEAM_ID")
-    private Long tramId;
+    //    @Column(name = "TEAM_ID")
+//    private Long tramId;)
+    @ManyToOne  // 다대일 명시
+    @JoinColumn(name = "TEAM_ID")
+    private Team team;
 
 
     // DB에 enum 없기에 지정. enum 순서기준 0,1,2로 등록되기에 EnumType.STRING 필수
@@ -81,12 +83,12 @@ public class Member {
         this.username = username;
     }
 
-    public Long getTramId() {
-        return tramId;
+    public Team getTeam() {
+        return team;
     }
 
-    public void setTramId(Long tramId) {
-        this.tramId = tramId;
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
     public RoleType getRoleType() {
