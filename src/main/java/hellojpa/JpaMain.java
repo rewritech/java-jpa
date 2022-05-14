@@ -54,7 +54,14 @@ public class JpaMain {
 //            em.flush();         // Send SQL. It's usually used for test.
 
             Team team = new Team();
-            team.set();
+            team.setName("TramA");
+            em.persist(team);
+
+            Member member = new Member();
+            member.setUsername("member1");
+            member.setTramId(team.getId());
+            em.persist(member);
+
             tx.commit();        // Send SQL
         } catch (Exception e) {
             tx.rollback();
