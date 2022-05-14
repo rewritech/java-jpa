@@ -68,6 +68,9 @@ public class JpaMain {
 
             System.out.println("findTeam.getId(): " + findTeam.getId());
 
+            Team newTeam = em.find(Team.class, 100L);
+            findMember.setTeam(newTeam);    // 참조 팀 변경
+
             tx.commit();        // Send SQL
         } catch (Exception e) {
             tx.rollback();
