@@ -16,7 +16,7 @@ import java.util.Date;
 public class Member {
     // Id는 시스템이 사라지는 아주 먼 미래까지 변해서는 안된다.
     // Long + 대체키 + 키 혹은 시퀀스 혹은 자동증가생성을 이용하자
-    @Id
+    @Id @GeneratedValue
 //    DB에 위임: 자동 생성 1,2,3,4 ...
 //    JPA영속성관점에서 commit 전에 ID가 없기에 IDENTITY 전략은 persist 순간에 INSERT 쿼리 날려서 ID 생성한다.
 //    즉, 모아서 inert 불가. 다행히도 한 트랜젝션에서 insert를 여러번 날려도 네트워크 부하가 그렇게 크지는 않다.
@@ -32,11 +32,14 @@ public class Member {
     private Long id;
 
     // unique도 있지만 이름이 랜덤으로 지정되어 에러시 파악 어렵기에 안 씀
-    @Column(name = "name", nullable = false, updatable = false)
+//    @Column(name = "name", nullable = false, updatable = false)
+    @Column(name = "USERNAME")
     private String username;
 
-    @Column()
-    private Integer age;
+
+    @Column(name = "TEAM_ID")
+    private Long tramId;
+
 
     // DB에 enum 없기에 지정. enum 순서기준 0,1,2로 등록되기에 EnumType.STRING 필수
     @Enumerated(EnumType.STRING)
