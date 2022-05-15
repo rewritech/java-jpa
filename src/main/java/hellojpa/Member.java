@@ -38,10 +38,16 @@ public class Member {
 
     //    @Column(name = "TEAM_ID")
 //    private Long tramId;)
+    
+    // 일대일 관계: 주 테이블이나 대상 테이블에 외래키 설정. DB FK에 유니크 설정됨
     @ManyToOne  // 다대일 명시 -> 다대일 양방향 사용하자. (일대다 단방향 혹은 양방향 쓰지말자)
     @JoinColumn(name = "TEAM_ID")   // 연관관계 주인으로 JoinColumn 필수. 없으면 조인테이블 생성.
 //    @JoinColumn(name = "TEAM_ID", updatable = false, insertable = false)   // 복잡한 비지니스에서 이렇게 양방향 설정하기도..
     private Team team;
+
+    @OneToOne
+    @JoinColumn(name = "LOCKER_ID")
+    private Locker locker;
 
 
     // DB에 enum 없기에 지정. enum 순서기준 0,1,2로 등록되기에 EnumType.STRING 필수
