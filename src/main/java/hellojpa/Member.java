@@ -38,8 +38,8 @@ public class Member {
 
     //    @Column(name = "TEAM_ID")
 //    private Long tramId;)
-    
-    // 일대일 관계: 주 테이블이나 대상 테이블에 외래키 설정. DB FK에 유니크 설정됨
+
+//    @OneToOne // 일대일 관계: 주 테이블이나 대상 테이블에 외래키 설정. DB FK에 유니크 설정됨
     // Member : Lock가 [다:일]로 관계가 바뀌면, Lock에 FK를 두고 유니크 조건을 빼면 된다.
     // 하지만, 비즈니스적으로 보통 Member를 많이 Select하기에 FK를 Member가 Nullable로 들고 있는 편이 좋다.
     // 만약 대상 테이블인 Locker에 FK를 둔 양방향에서 지연 로딩 설정에도 항상 즉시 로딩
