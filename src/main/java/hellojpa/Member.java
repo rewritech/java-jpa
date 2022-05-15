@@ -40,6 +40,10 @@ public class Member {
 //    private Long tramId;)
     
     // 일대일 관계: 주 테이블이나 대상 테이블에 외래키 설정. DB FK에 유니크 설정됨
+    // Member : Lock가 [다:일]로 관계가 바뀌면, Lock에 FK를 두고 유니크 조건을 빼면 된다.
+    // 하지만, 비즈니스적으로 보통 Member를 많이 Select하기에 FK를 Member가 Nullable로 들고 있는 편이 좋다.
+    // 만약 대상 테이블인 Locker에 FK를 둔 양방향에서 지연 로딩 설정에도 항상 즉시 로딩
+    // -> Member 취득에 Locker를 탐색해야 하기때문에  (차후에 더 설명 추가 예정)
     @ManyToOne  // 다대일 명시 -> 다대일 양방향 사용하자. (일대다 단방향 혹은 양방향 쓰지말자)
     @JoinColumn(name = "TEAM_ID")   // 연관관계 주인으로 JoinColumn 필수. 없으면 조인테이블 생성.
 //    @JoinColumn(name = "TEAM_ID", updatable = false, insertable = false)   // 복잡한 비지니스에서 이렇게 양방향 설정하기도..
