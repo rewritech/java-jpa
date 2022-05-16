@@ -3,7 +3,10 @@ package hellojpa;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 @Entity
 //@SequenceGenerator(
 //        name = "MEMBER_SEQ_GENERATOR",
@@ -44,6 +47,7 @@ public class Member {
     // 하지만, 비즈니스적으로 보통 Member를 많이 Select하기에 FK를 Member가 Nullable로 들고 있는 편이 좋다.
     // 만약 대상 테이블인 Locker에 FK를 둔 양방향에서 지연 로딩 설정에도 항상 즉시 로딩
     // -> Member 취득에 Locker를 탐색해야 하기때문에  (차후에 더 설명 추가 예정)
+//    @ManyToMany // 비즈니스적으로 사용하지 않는다. -> 조인테이블을 만들어서 A:B:C 일대다(A:B) 다대일(B:C)을 만든다
     @ManyToOne  // 다대일 명시 -> 다대일 양방향 사용하자. (일대다 단방향 혹은 양방향 쓰지말자)
     @JoinColumn(name = "TEAM_ID")   // 연관관계 주인으로 JoinColumn 필수. 없으면 조인테이블 생성.
 //    @JoinColumn(name = "TEAM_ID", updatable = false, insertable = false)   // 복잡한 비지니스에서 이렇게 양방향 설정하기도..
@@ -53,8 +57,16 @@ public class Member {
     @JoinColumn(name = "LOCKER_ID")
     private Locker locker;
 
+//    @ManyToMany // 예제일 뿐 실제로는 안 쓴다
+//    대신 OneToMany & ManyToOne 을 따로 엔티티로 승격해 만들자(MemberProduct)
+//    @JoinTable(name = "MEMBER_PRODUCT")
+//    private List<Product> products = new ArrayList<>();
+//    @OneToMany(mappedBy = "")
+//    private List<MemberProduct> memberProducts = new ArrayList<>();
+    @OneToMany(mappedBy = "member")
+    private List<MemberProduct> memberProducts = new ArrayList<>();
 
-    // DB에 enum 없기에 지정. enum 순서기준 0,1,2로 등록되기에 EnumType.STRING 필수
+// DB에 enum 없기에 지정. enum 순서기준 0,1,2로 등록되기에 EnumType.STRING 필수
     @Enumerated(EnumType.STRING)
     private RoleType roleType;
 
